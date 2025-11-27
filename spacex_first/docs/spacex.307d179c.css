@@ -1,0 +1,1 @@
+.main{display:flex}.aside{flex-grow:.3}.content{flex-grow:.7}#listContainer{border:1px solid #000;height:300px;overflow:hidden scroll}#listContainer ul li{white-space:nowrap;max-width:250px}#listContainer ul li:hover{cursor:pointer;font-weight:700}

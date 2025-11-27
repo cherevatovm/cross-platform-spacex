@@ -63,7 +63,7 @@ function drawMap(launchpadsData) {
     .append("path")
     .attr("class", "topo")
     .attr("d", d3.geoPath().projection(projection))
-    .style("opacity", 1);
+    .style("opacity", 0.85);
   svg
     .selectAll(".launchpads")
     .data(launchpadsData)
