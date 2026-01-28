@@ -1,40 +1,32 @@
-import * as d3 from "d3";
-
-const LaunchElement = (launch) => {
-  const handleMouseOver = () => {
-    const launchpad = d3.select(`#i${launch.launchpad}`);
-    launchpad.attr("class", "highlightedLaunchpad");
-    
-    d3.select("#launchpads")
-      .selectAll("path")
-      .sort((a, b) => a.id === launch.launchpad ? 1 : -1);
-  };
-  
-  const handleMouseLeave = () => {
-    d3.select(`#i${launch.launchpad}`).attr("class", "launchpad");
-  };
+function LaunchList({ launches, onHover, onLeave }) {
+  if (launches.length === 0) {
+    return (
+      <aside className="aside">
+        <h3>Launches</h3>
+        <p>Loading launches...</p>
+      </aside>
+    );
+  }
 
   return (
-    <li 
-      className="launchItem"
-      key={launch.id}
-      onMouseOver={handleMouseOver}
-      onMouseLeave={handleMouseLeave}
-    >
-      {launch.name}
-    </li>
+    <aside className="aside">
+      <h3>Launches ({launches.length})</h3>
+      <div id="listContainer">
+        <ul>
+          {launches.map(launch => (
+            <li
+              key={launch.id}
+              className="launchItem"
+              onMouseEnter={() => onHover(launch.launchpad)}
+              onMouseLeave={onLeave}
+            >
+              {launch.name}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </aside>
   );
-};
-
-const LaunchList = ({ launches }) => (
-  <aside className="aside" id="launchesContainer">
-    <h3>Launches</h3>
-    <div id="listContainer">
-      <ul>
-        {launches.map(launch => LaunchElement(launch))}
-      </ul>
-    </div>
-  </aside>
-);
+}
 
 export { LaunchList };
